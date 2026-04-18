@@ -1,0 +1,39 @@
+{
+  "name": "mcp-audit",
+  "version": "0.1.0",
+  "description": "Security auditor for Model Context Protocol (MCP) servers — scans tool definitions for prompt injection, tool poisoning, unsafe combinations, and other AI-native vulnerabilities.",
+  "type": "module",
+  "bin": {
+    "mcp-audit": "./bin/mcp-audit.js"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node bin/mcp-audit.js",
+    "test": "node --test test/",
+    "audit:brain": "node bin/mcp-audit.js scan --stdio 'node ../dj-abstract-ai-brain/src/agents/brain-tools-mcp.js'",
+    "audit:self": "node bin/mcp-audit.js scan --manifest test/fixtures/sample-manifest.json"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "audit",
+    "ai-security",
+    "prompt-injection",
+    "tool-poisoning",
+    "llm-security",
+    "agent-security"
+  ],
+  "author": "Arthur Abrego",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "kleur": "^4.1.5"
+  }
+}

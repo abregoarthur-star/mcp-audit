@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+out/
+reports/
+*.report.html
+*.report.json
