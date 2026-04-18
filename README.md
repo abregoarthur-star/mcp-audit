@@ -136,14 +136,50 @@ It will not catch:
 
 Pair it with conventional SAST/DAST and supply-chain scanning.
 
+## Differential audits (`diff`)
+
+Detect **rug-pulls and drift** between two snapshots of an MCP server. New to `0.3.0`.
+
+```bash
+# First time — save a baseline
+mcp-audit scan --stdio "..." --json baseline.json
+
+# Later — diff current state against baseline
+mcp-audit diff baseline.json current.json
+mcp-audit diff baseline.json current.json --fail-on high   # CI gate
+```
+
+What it catches:
+
+| Severity | Detects |
+|---|---|
+| **CRITICAL** | A new tool introduces a capability class (shell-exec, network-egress, secret-read) the server didn't have before — silent capability expansion, classic rug-pull. |
+| **CRITICAL** | Prompt-injection markers appeared in a tool description that wasn't there before. |
+| **CRITICAL** | An existing tool's capability class widened (e.g. its name or schema now implies shell execution where it previously didn't). |
+| **HIGH** | Server-level capability drift — the union of the server's capabilities has grown. |
+| **HIGH** | `readOnlyHint` annotation removed — a previously read-only tool can now mutate state. |
+| **HIGH** | `inputSchema` widened with `additionalProperties: true`. |
+| **HIGH** | Tool description materially rewritten (>25% length delta). |
+| **MEDIUM** | New tool added (no new capability class). |
+| **MEDIUM** | Tool removed. |
+| **MEDIUM** | Required parameters dropped from `inputSchema`. |
+| **LOW** | Cosmetic description or schema edits. |
+
+Pair with CI: if you connect your agent to a third-party MCP server, run `mcp-audit scan --json current.json` nightly and `mcp-audit diff prior.json current.json --fail-on high` to page on silent changes. Your agents should not discover a new `execute_command` tool on a server they've trusted for months.
+
 ## Programmatic API
 
 ```javascript
-import { audit } from '@dj_abstract/mcp-audit';
+import { audit, diff } from '@dj_abstract/mcp-audit';
 
+// Scan
 const report = await audit({ stdio: 'node ./server.js' });
 console.log(report.summary.bySeverity);
-for (const f of report.findings) {
+
+// Diff
+const result = await diff('baseline.json', 'current.json');
+console.log(result.summary, result.changes);
+for (const f of result.findings) {
   console.log(f.severity, f.ruleId, f.title);
 }
 ```
@@ -152,7 +188,6 @@ for (const f of report.findings) {
 
 - Detection-only Nuclei-style remote checks (auth bypass probes, CORS misconfig)
 - Per-tool permission-cost scoring (rank which tools deserve human-in-the-loop gating)
-- Differential audits (compare two manifests; flag rug-pulls and silent capability changes)
 - Integration with the [MCP server registry](https://modelcontextprotocol.io/) for community scoring
 - Recipe for Brain Agent SDK to call `audit()` before connecting to any new server
 

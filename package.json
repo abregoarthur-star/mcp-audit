@@ -1,6 +1,6 @@
 {
   "name": "@dj_abstract/mcp-audit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Security auditor for Model Context Protocol (MCP) servers — scans tool definitions for prompt injection, tool poisoning, unsafe combinations, and other AI-native vulnerabilities.",
   "type": "module",
   "bin": {
