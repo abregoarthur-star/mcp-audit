@@ -1,5 +1,9 @@
 # mcp-audit
 
+[![npm version](https://img.shields.io/npm/v/@dj_abstract/mcp-audit.svg?color=cb3837&logo=npm)](https://www.npmjs.com/package/@dj_abstract/mcp-audit)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Node.js >=20](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
+
 A security auditor for **Model Context Protocol (MCP)** servers. Scans tool, resource, and prompt definitions for AI-native security issues — prompt injection, tool poisoning, dangerous capability combinations, schema permissiveness, and more.
 
 > Why this exists: MCP servers ship arbitrary text directly into the host LLM's context. A malicious or sloppy server can manipulate any agent that connects to it. As the MCP ecosystem grows, the surface for prompt injection, tool poisoning, and "lethal trifecta" capability combinations grows with it. There's no shortage of CVE scanners. There's almost nothing focused on the threats that are unique to agent infrastructure.
@@ -20,11 +24,20 @@ A security auditor for **Model Context Protocol (MCP)** servers. Scans tool, res
 
 ## Install
 
+One-shot with `npx` (no install):
+
 ```bash
-npm install -g mcp-audit
+npx @dj_abstract/mcp-audit scan --stdio "node ./my-mcp-server.js"
 ```
 
-Or run from the repo:
+Global install:
+
+```bash
+npm install -g @dj_abstract/mcp-audit
+mcp-audit --help
+```
+
+Or clone and run from source:
 
 ```bash
 git clone https://github.com/abregoarthur-star/mcp-audit
@@ -126,7 +139,7 @@ Pair it with conventional SAST/DAST and supply-chain scanning.
 ## Programmatic API
 
 ```javascript
-import { audit } from 'mcp-audit';
+import { audit } from '@dj_abstract/mcp-audit';
 
 const report = await audit({ stdio: 'node ./server.js' });
 console.log(report.summary.bySeverity);
