@@ -1,7 +1,8 @@
 import { connect } from './connectors/index.js';
 import { runRules, SEVERITY_ORDER } from './rules/index.js';
+import { diff } from './diff.js';
 
-export { connect, runRules, SEVERITY_ORDER };
+export { connect, runRules, SEVERITY_ORDER, diff };
 
 export async function audit(spec) {
   const server = await connect(spec);
