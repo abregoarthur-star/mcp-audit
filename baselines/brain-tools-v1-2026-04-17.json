@@ -1,0 +1,398 @@
+{
+  "auditedAt": "2026-04-18T03:24:55.444Z",
+  "server": {
+    "name": "brain-tools",
+    "version": null,
+    "transport": "sdk-in-process",
+    "url": null,
+    "auth": {
+      "kind": "process-trust"
+    },
+    "counts": {
+      "tools": 16,
+      "resources": 0,
+      "prompts": 0
+    }
+  },
+  "findings": [
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"save_memory\": String param \"key\" has no length, format, or pattern constraint.",
+      "description": "String param \"key\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "key",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Short label"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "save_memory"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"save_memory\": String param \"value\" has no length, format, or pattern constraint.",
+      "description": "String param \"value\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "value",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "The fact to remember"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "save_memory"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_linkedin_draft\": String param \"topic\" has no length, format, or pattern constraint.",
+      "description": "String param \"topic\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "topic",
+        "required": false,
+        "schema": {
+          "description": "Post topic",
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_linkedin_draft"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_linkedin_draft\": String param \"angle\" has no length, format, or pattern constraint.",
+      "description": "String param \"angle\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "angle",
+        "required": false,
+        "schema": {
+          "description": "Post angle/style",
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_linkedin_draft"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"plan_trip\": String param \"request\" has no length, format, or pattern constraint.",
+      "description": "String param \"request\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "request",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Travel request description"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "plan_trip"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"catalog_ip\": String param \"category\" has no length, format, or pattern constraint.",
+      "description": "String param \"category\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "category",
+        "required": false,
+        "schema": {
+          "description": "Asset category (for add)",
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "catalog_ip"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"catalog_ip\": String param \"name\" has no length, format, or pattern constraint.",
+      "description": "String param \"name\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "name",
+        "required": false,
+        "schema": {
+          "description": "Asset name (for add)",
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "catalog_ip"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"catalog_ip\": String param \"description\" has no length, format, or pattern constraint.",
+      "description": "String param \"description\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "description",
+        "required": false,
+        "schema": {
+          "description": "Asset description (for add)",
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "catalog_ip"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"send_telegram\": String param \"message\" has no length, format, or pattern constraint.",
+      "description": "String param \"message\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "message",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Message to send"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "send_telegram"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"manage_tasks\": String param \"title\" has no length, format, or pattern constraint.",
+      "description": "String param \"title\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "title",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "manage_tasks"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"manage_tasks\": String param \"description\" has no length, format, or pattern constraint.",
+      "description": "String param \"description\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "description",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "manage_tasks"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"manage_tasks\": String param \"taskId\" has no length, format, or pattern constraint.",
+      "description": "String param \"taskId\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "taskId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "manage_tasks"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_event\": String param \"title\" has no length, format, or pattern constraint.",
+      "description": "String param \"title\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "title",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Event title"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_event"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_event\": String param \"start\" has no length, format, or pattern constraint.",
+      "description": "String param \"start\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "start",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "Start time (ISO 8601)"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_event"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_event\": String param \"end\" has no length, format, or pattern constraint.",
+      "description": "String param \"end\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "end",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "End time (ISO 8601)"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_event"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_event\": String param \"description\" has no length, format, or pattern constraint.",
+      "description": "String param \"description\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "description",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_event"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    },
+    {
+      "ruleId": "schema-permissiveness",
+      "severity": "low",
+      "title": "Schema issue in tool \"create_event\": String param \"location\" has no length, format, or pattern constraint.",
+      "description": "String param \"location\" has no length, format, or pattern constraint.",
+      "evidence": {
+        "param": "location",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "kind": "tool",
+        "name": "create_event"
+      },
+      "remediation": "Add appropriate constraints: enum for known sets, pattern/format for structured strings, maxLength bounds, properties for objects.",
+      "references": [
+        "https://json-schema.org/"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 17,
+    "bySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 17,
+      "info": 0
+    }
+  }
+}

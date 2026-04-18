@@ -1,0 +1,28 @@
+{
+  "auditedAt": "2026-04-18T03:24:55.556Z",
+  "server": {
+    "name": "brain-exec",
+    "version": null,
+    "transport": "sdk-in-process",
+    "url": null,
+    "auth": {
+      "kind": "process-trust"
+    },
+    "counts": {
+      "tools": 1,
+      "resources": 0,
+      "prompts": 0
+    }
+  },
+  "findings": [],
+  "summary": {
+    "total": 0,
+    "bySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    }
+  }
+}
