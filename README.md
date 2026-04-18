@@ -200,6 +200,19 @@ for (const f of result.findings) {
 - [MITRE ATLAS](https://atlas.mitre.org/)
 - [Model Context Protocol specification](https://modelcontextprotocol.io/)
 
+## Related tools
+
+Part of a **detect → inventory → test → generate → defend** pipeline for AI-agent security:
+
+| Layer | Tool | Role |
+|---|---|---|
+| Detect | **mcp-audit** *(you are here)* | Static audit of MCP server definitions |
+| Detect | [`mcp-audit-sweep`](https://github.com/abregoarthur-star/mcp-audit-sweep) | Reproducible sweep of public MCP servers (methodology + report) |
+| Inventory | [`@dj_abstract/agent-capability-inventory`](https://github.com/abregoarthur-star/agent-capability-inventory) | Fleet-wide tool catalog with data-sensitivity tags |
+| Test | [`prompt-eval`](https://github.com/abregoarthur-star/prompt-eval) | Runtime prompt-injection eval harness against a live agent |
+| Generate | [`@dj_abstract/prompt-genesis`](https://github.com/abregoarthur-star/prompt-genesis) | LLM-driven adversarial attack corpus generator (feeds prompt-eval) |
+| Defend | [`@dj_abstract/agent-firewall`](https://github.com/abregoarthur-star/agent-firewall) | Call-time defensive middleware for tool invocations |
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
