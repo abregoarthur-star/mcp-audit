@@ -54,17 +54,23 @@ function classifyTool(tool) {
   if (has(VERBS_WRITE, tokens) && has(NOUNS_FILE, tokens)) caps.add('file_write');
   if (tokens.includes('mkdir') || tokens.includes('rmdir')) caps.add('file_write');
 
-  // Secret read — read-verb + secret-noun
-  if (has(VERBS_READ, tokens) && has(NOUNS_SECRET, tokens)) caps.add('secret_read');
-
-  // Network egress — egress-verb + service-noun (either order)
-  if (has(VERBS_EGRESS, tokens) && has(SERVICES_NETWORK, tokens)) caps.add('network_out');
-  // Or clear outbound idioms: post_webhook, http_request, fetch_url, download
-  if (tokens.includes('webhook') || tokens.includes('download') ||
-      (tokens.includes('http') && has(new Set(['get','post','put','delete','request']), tokens)) ||
-      (tokens.includes('fetch') && (tokens.includes('url') || tokens.includes('http')))) {
-    caps.add('network_out');
+  // Secret read — read-verb + secret-noun, UNLESS the name also contains
+  // analytics/aggregation tokens (e.g. `get_leaked_credentials_data` reports
+  // trends, not credential contents).
+  const ANALYTICS_TOKENS = new Set(['data','trend','trends','stat','stats','statistics','count','counts','summary','aggregate','aggregated','distribution','analytics','insight','insights','observation','observations','metric','metrics']);
+  if (has(VERBS_READ, tokens) && has(NOUNS_SECRET, tokens) && !has(ANALYTICS_TOKENS, tokens)) {
+    caps.add('secret_read');
   }
+
+  // Network egress — requires an explicit SEND-class action.
+  // Read-style idioms (`get_http_data`, `list_webhooks`) are analytics reads,
+  // not capability-carrying outbound calls.
+  const SEND_VERBS = new Set(['send','post','publish','upload','notify','dispatch','push','call','invoke','trigger','make','request']);
+  if (has(SEND_VERBS, tokens) && has(SERVICES_NETWORK, tokens)) caps.add('network_out');
+  if (tokens.includes('download') || tokens.includes('upload')) caps.add('network_out');
+  if (tokens.includes('http') && has(new Set(['request','post','put','delete','call','make']), tokens)) caps.add('network_out');
+  if (tokens.includes('fetch') && (tokens.includes('url') || tokens.includes('http'))) caps.add('network_out');
+  if (tokens.includes('webhook') && has(SEND_VERBS, tokens)) caps.add('network_out');
 
   // DB write — mutation verb + db noun, or `execute_sql`/`apply_migration` idioms
   if (has(VERBS_DB_WRITE, tokens) && has(NOUNS_DB, tokens)) caps.add('db_write');
