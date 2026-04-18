@@ -27,6 +27,16 @@ export async function audit(spec) {
         prompts: server.prompts.length,
       },
     },
+    // Structural snapshot — preserved so the report itself can be used
+    // as a baseline for `mcp-audit diff` without re-extraction.
+    tools: server.tools.map(t => ({
+      name: t.name,
+      description: t.description,
+      inputSchema: t.inputSchema,
+      annotations: t.annotations,
+    })),
+    resources: server.resources.map(r => ({ uri: r.uri, name: r.name, description: r.description })),
+    prompts: server.prompts.map(p => ({ name: p.name, description: p.description })),
     findings,
     summary: {
       total: findings.length,
