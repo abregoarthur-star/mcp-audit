@@ -76,6 +76,7 @@ mcp-audit scan --manifest server.json
 ```bash
 mcp-audit scan --stdio "..." --html report.html        # standalone HTML, share-friendly
 mcp-audit scan --stdio "..." --json report.json        # JSON for CI / automation
+mcp-audit scan --stdio "..." --sarif results.sarif     # SARIF 2.1.0 — GitHub code-scanning compatible
 mcp-audit scan --stdio "..." --json                    # JSON to stdout
 mcp-audit scan --stdio "..." --quiet --json | jq ...   # piping
 ```
@@ -87,6 +88,19 @@ Exit non-zero if any finding meets a severity threshold:
 ```bash
 mcp-audit scan --stdio "..." --fail-on high
 ```
+
+### GitHub Actions (native Code Scanning integration)
+
+Drop-in Action that runs the scan, emits SARIF, and surfaces findings in your PR's Security tab and inline on Files Changed:
+
+```yaml
+- uses: abregoarthur-star/mcp-audit-action@v1
+  with:
+    manifest: ./mcp-manifest.json
+    fail-on: high
+```
+
+Full docs and recipes: [mcp-audit-action](https://github.com/abregoarthur-star/mcp-audit-action).
 
 ## Auditing Agent SDK servers
 

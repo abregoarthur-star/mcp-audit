@@ -4,6 +4,7 @@ import { audit } from '../src/index.js';
 import { diff } from '../src/diff.js';
 import { renderTerminal } from '../src/reporters/terminal.js';
 import { renderHtml } from '../src/reporters/html.js';
+import { renderSarif } from '../src/reporters/sarif.js';
 import { renderDiffTerminal } from '../src/reporters/diff-terminal.js';
 
 const HELP = `mcp-audit — security auditor for MCP servers
@@ -19,6 +20,7 @@ Scan options:
   --header "<K: V>"           Extra header (repeatable)
   --json [path]               Emit JSON report (stdout if no path)
   --html <path>               Emit HTML report
+  --sarif <path>              Emit SARIF 2.1.0 report (GitHub code-scanning compatible)
   --quiet                     Suppress terminal report
   --fail-on <severity>        Exit non-zero if any finding >= severity (critical|high|medium|low)
 
@@ -33,6 +35,7 @@ Examples:
   mcp-audit scan --stdio "node ./my-mcp-server.js"
   mcp-audit scan --url https://mcp.example.com --bearer $TOKEN --html report.html
   mcp-audit scan --manifest server.json --fail-on high
+  mcp-audit scan --manifest server.json --sarif results.sarif  # for GitHub code-scanning
   mcp-audit diff baseline.json current.json --fail-on high
 `;
 
@@ -88,6 +91,11 @@ async function runScan(args) {
   if (opts.html) {
     await writeFile(opts.html, renderHtml(report));
     process.stderr.write(`HTML report written: ${opts.html}\n`);
+  }
+
+  if (opts.sarif) {
+    await writeFile(opts.sarif, JSON.stringify(renderSarif(report), null, 2));
+    process.stderr.write(`SARIF report written: ${opts.sarif}\n`);
   }
 
   applyFailOn(opts, report.findings);
@@ -165,6 +173,7 @@ function parseArgs(args) {
         break;
       }
       case '--html':    out.html = next(); break;
+      case '--sarif':   out.sarif = next(); break;
       case '--quiet':   out.quiet = true; break;
       case '--fail-on': out.failOn = next(); break;
       case '-h':
